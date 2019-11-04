@@ -32,7 +32,7 @@ public class DemoController extends BaseController {
 
     private void addRetryTask() throws Exception {
         String url = "http://localhost:8082/admin/retry/callback";
-        HttpResult httpResult =  httpClientUtil.doPost(url,new HashMap<>());
+        HttpResult httpResult = httpClientUtil.doPost(url, new HashMap<>());
         System.out.println(httpResult.getBody());
     }
 
