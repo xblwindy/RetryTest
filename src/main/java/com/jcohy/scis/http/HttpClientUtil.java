@@ -21,34 +21,11 @@ public class HttpClientUtil {
     }
 
     // 新增
-    public HttpResult doPost(String url, Map<String, Object> map) throws Exception {
-        HttpResult httpResult = this.httpClient.doPost(url, map);
+    public HttpResult doPost(String url, String json) throws Exception {
+        HttpResult httpResult = this.httpClient.doPost(url, json);
         return httpResult;
     }
 
-    // 修改
-
-
-    public void doPut(String url, Map<String, Object> map) throws Exception {
-
-
-        HttpResult httpResult = this.httpClient.doPut(url, map);
-
-        System.out.println(httpResult.getCode());
-        System.out.println(httpResult.getBody());
-
-    }
-
-    // 删除
-
-    public void doDelete(String url, Map<String, Object> map) throws Exception {
-
-        HttpResult httpResult = this.httpClient.doDelete(url, null);
-
-        System.out.println(httpResult.getCode());
-        System.out.println(httpResult.getBody());
-
-    }
 
 
 }
