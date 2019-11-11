@@ -1,0 +1,17 @@
+@startuml
+actor user as U
+entity system as S
+entity kernel as K
+database mysql as D
+
+U->S:保存合约请求
+S->D:保存合约到数据库
+S->U:保存结果
+U->S:合约上线
+S->K:同步合约信息
+S->U:合约上线结果
+U->S:合约交易状态切换
+S->K:同步合约交易状态(附带合约开始生效时间)
+S->U:合约交易状态切换结果
+
+@enduml

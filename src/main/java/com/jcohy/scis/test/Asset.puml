@@ -1,0 +1,13 @@
+@startuml
+actor user as U
+entity system as S
+entity kernel as K
+database mysql as D
+
+U->S:保存资产请求
+S->D:保存资产到数据库
+S->U:保存结果
+U->S:资产上线
+S->K:同步资产信息
+S->U:资产上线结果
+@enduml

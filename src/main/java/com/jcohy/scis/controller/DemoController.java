@@ -4,9 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.jcohy.scis.http.HttpClientUtil;
 import com.jcohy.scis.model.HttpResult;
+
 import com.jcohy.scis.model.Test;
+import com.jcohy.scis.model.TestRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,6 +28,8 @@ public class DemoController extends BaseController {
     @ResponseBody
     public String doSomething(HttpServletRequest request) throws Exception {
         Test test = new Test();
+        TestRequest testRequest = new TestRequest();
+        test.setArgs(testRequest);
         try {
             doThings(test);
         } catch (Exception e) {
@@ -37,11 +40,9 @@ public class DemoController extends BaseController {
 
     private void addRetryTask(Test test) throws Exception {
         String url = "http://localhost:8082/admin/retry/add";
-        Map<String,Object> task = new HashMap<>();
+        Map<String, Object> task = new HashMap<>();
         String args = JSON.toJSONString(test);
-        task.put("args",args);
-        task.put("retryTimes","1");
-        task.put("totalRetryTimes","3");
+        task.put("args", args);
         String putJson = new JSONObject(task).toString();
         HttpResult httpResult = httpClientUtil.doPost(url, putJson);
         System.out.println(httpResult.getBody());
@@ -53,4 +54,9 @@ public class DemoController extends BaseController {
     }
 
 
+    @PostMapping("/callback")
+    @ResponseBody
+    public void callback(HttpServletRequest request) throws Exception {
+        System.out.println("callback ok ++++++++++++++++++");
+    }
 }
